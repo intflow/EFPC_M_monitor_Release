@@ -13,7 +13,6 @@ from queue import Queue
 import struct
 import configs
 from utils import *
-import httpserver
 import firmware_manager
 
 def key_match(src_key, src_data, target_data):
@@ -90,9 +89,6 @@ if __name__ == "__main__":
     docker_repo = configs.docker_repo
     docker_image, docker_image_id = find_lastest_docker_image(docker_repo)
     docker_image_tag_header = configs.docker_image_tag_header    
-    
-    http_server_process = multiprocessing.Process(target=httpserver.run_httpserver)
-    http_server_process.start()
 
     os.makedirs(configs.firmware_dir, exist_ok=True)
     firmware_manager.copy_firmwares()
